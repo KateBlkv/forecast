@@ -4,7 +4,9 @@ import WeatherLaptop from "./components/WeatherLaptop.vue"
 </script>
 
 <template>
-  <weather-laptop/>
+  <div class="page">
+    <weather-laptop/>
+  </div>
 </template>
 
 <style lang="sass">

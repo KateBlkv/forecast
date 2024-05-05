@@ -1,15 +1,10 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import store from "@/store/index.js";
-import { capitalizeFirstLetter } from '../utils'
+import {computed} from 'vue'
+import {capitalizeFirstLetter} from '../utils'
+import useWeather from "@/hooks/useWeather.js";
 
-const city = ref('Izmir')
-
-function getWeather(){
-  store.dispatch('getWeather', city.value)
-}
-
-onMounted(getWeather)
+// Вынес логику в хук
+const { city, getWeather } = useWeather()
 
 const today = new Date().toLocaleString('en-EN', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric'})
 
