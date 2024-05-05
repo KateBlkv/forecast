@@ -1,5 +1,6 @@
 <script setup>
-const props = defineProps({
+// Неиспользуемая переменная
+defineProps({
   firstTitle: {
     required: true,
     type: String,
@@ -20,19 +21,18 @@ const props = defineProps({
 
 <template>
   <div class="block-bottom">
-    <div class="block-bottom-inner">
-      <div class="block-bottom-pic" :class="'pic-' + imgClass"></div>
-      <div class="block-bottom-texts">
-        <div class="block-bottom-text-block">
-          <div class="block-bottom-text-block-title">
-            {{firstTitle}}: {{ firstValue }}
-          </div>
-          <div class="block-bottom-text-block-desc">
-            <slot name="firstText"></slot>
-          </div>
+<!--    Избавился от блока div.block-bottom-inner за ненадобностью-->
+    <div class="block-bottom-pic" :class="'pic-' + imgClass"/>
+    <div class="block-bottom-texts">
+      <div class="block-bottom-text-block">
+        <div class="block-bottom-text-block-title">
+          {{ firstTitle }}: {{ firstValue }}
         </div>
-        <slot name="additional"></slot>
+        <div class="block-bottom-text-block-desc">
+          <slot name="firstText"/>
+        </div>
       </div>
+      <slot name="additional"/>
     </div>
   </div>
 </template>

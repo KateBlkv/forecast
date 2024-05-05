@@ -10,7 +10,7 @@
 
   .sections
     background-color: #0e100f
-    border-radius: 25px
+    border-radius: 36px // Так выглядит ровно
     //width: 1100px
     //height: 640px
     max-width: 1100px
@@ -39,19 +39,32 @@
   @media (max-width: 575px)
     width: 100%
 
+// Добавил стили для состояния с ошибкой
+
 .search
   background-color: rgba(0, 0, 0, 0.75)
   width: 100%
-  border: none
+  border: 1px solid transparent
   outline: none
   padding: 16px
   border-radius: 16px
   color: white
   font-family: 'Inter', Arial, sans-serif
-  cursor: pointer
+
+  &.has-error
+    border-color: #dc6060
 
 .city-inner
   position: relative
+
+  .error-msg
+    position: absolute
+    color: #dc6060
+    right: 0
+    bottom: -20px
+    font-size: 12px
+    line-height: 16px
+    padding-right: 16px
 
   &::after
     content: ''
@@ -280,7 +293,12 @@
   @media (max-width: 575px)
     flex-direction: column
 
+// Можно избавиться от элемента div.block-bottom-inner
+
 .block-bottom
+  display: flex
+  gap: 20px
+  align-items: center
   width: 50%
   background-image: url("src/assets/img/gradient-1.jpg")
   background-size: cover
@@ -291,11 +309,6 @@
 
   @media (max-width: 575px)
     width: 100%
-
-.block-bottom-inner
-  display: flex
-  gap: 20px
-  align-items: center
 
 .block-bottom-pic
   background-repeat: no-repeat

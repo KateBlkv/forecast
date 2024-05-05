@@ -1,5 +1,6 @@
 <script setup>
-const props = defineProps({
+// Неиспользуемая переменная props
+defineProps({
   cardTitle: {
     required: true,
     type: String,
@@ -16,7 +17,8 @@ const props = defineProps({
     type: String,
   },
   cardValue: {
-    type: String,
+    // Тип - число
+    type: Number,
   },
 })
 </script>
@@ -36,7 +38,7 @@ const props = defineProps({
         </div>
       </div>
       <div class="card-small-hint">
-        <div class="card-small-pic" :class="'card-small-pic--' + classNameCard"></div>
+        <div class="card-small-pic" :class="'card-small-pic--' + classNameCard"/>
         <div class="card-small-text" v-html="cardData"/>
       </div>
     </div>

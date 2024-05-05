@@ -1,6 +1,7 @@
 <script setup>
 import HighlightSmallCard from "./HighlightSmallCard.vue"
-const props = defineProps({
+// Неиспользуемая переменная props
+defineProps({
   className: {
     required: true,
     type: String,
@@ -21,7 +22,8 @@ const props = defineProps({
     type: String,
   },
   cardValue: {
-    type: String,
+    // Тип - число
+    type: Number,
   },
 })
 </script>
@@ -34,10 +36,16 @@ const props = defineProps({
       </div>
       <div class="card-pic" :class="'card-pic--' + className"></div>
       <div class="card-info">
-        <slot></slot>
+<!--        Vue позволяет сразу закрывать тег, в котором нет содержимого-->
+        <slot/>
       </div>
     </div>
-    <highlight-small-card :unit="unit" :class-name-card="className" :card-title="cardTitle" :card-data="smallCardData" :card-value="cardValue"/>
+    <highlight-small-card
+        :unit="unit"
+        :class-name-card="className"
+        :card-title="cardTitle"
+        :card-data="smallCardData"
+        :card-value="cardValue"/>
   </div>
 </template>
 

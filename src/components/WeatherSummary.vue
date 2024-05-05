@@ -2,6 +2,7 @@
 import {computed} from 'vue'
 import {capitalizeFirstLetter} from '../utils'
 import useWeather from "@/hooks/useWeather.js";
+import store from "@/store/index.js";
 
 // Вынес логику в хук
 const { city, getWeather } = useWeather()
@@ -18,18 +19,23 @@ const props = defineProps({
 const weather = computed(() => props.data?.weather[0])
 const mainData = computed(() => props.data?.main)
 const sysData = computed(() => props.data?.sys)
+// Добавил свойство с текстом ошибки
+const error = computed(() => store.getters.getError)
 </script>
 
 <template>
   <div class="info">
     <div class="city-inner">
-      <input type="text" class="search" v-model="city" @keyup.enter="getWeather">
+<!--      Добавил класс has-error-->
+      <input type="text" class="search" :class="error && 'has-error'" v-model="city" @keyup.enter="getWeather">
+<!--      Добавил элемент с текстом ошибки-->
+      <div v-if="error" class="error-msg">{{ error }}</div>
     </div>
     <div v-if="weather" class="summary">
       <div
           :style="`background-image: url('/src/assets/img/weather-main/${weather.description}.png');`"
           class="pic-main"
-      ></div>
+      />
       <div class="weather">
         <div class="temp">
           {{ Math.round(mainData?.temp) }} °C

@@ -35,70 +35,66 @@ const sunsetTime = computed(() => {
     </div>
     <div class="highlights-wrapper">
 
+<!--      тег <template #default> можно выкинуть, если другие теги <template> (для других слотов) не применяются вместе с ним-->
+
       <highlight title="Wind" unit="m/s" card-title="Wind gusts" class-name="wind" :small-card-data="windCardData"
                  :card-value="weatherInfo?.wind?.gust">
-        <template #default>
-          <div class="card-justify">
-            <div class="info-main">
-              <div class="info-main-num">
-                {{ weatherInfo?.wind?.speed }}
-              </div>
-              <div class="info-main-text">
-                m/s
-              </div>
+        <div class="card-justify">
+          <div class="info-main">
+            <div class="info-main-num">
+              {{ weatherInfo?.wind?.speed }}
             </div>
-            <div class="info-main">
-              <div class="info-main-num">
-                {{ weatherInfo?.wind?.deg }}
-              </div>
-              <div class="info-main-text">
-                deg
-              </div>
+            <div class="info-main-text">
+              m/s
             </div>
           </div>
-        </template>
+          <div class="info-main">
+            <div class="info-main-num">
+              {{ weatherInfo?.wind?.deg }}
+            </div>
+            <div class="info-main-text">
+              deg
+            </div>
+          </div>
+        </div>
       </highlight>
 
       <highlight title="Pressure" unit="mm" card-title="Feels like" class-name="pressure" :small-card-data="tempCardData"
                  :card-value="weatherInfo?.main.feels_like">
-        <template #default>
-          <div class="card-centered">
-            <div class="info-main">
-              <div class="info-main-num">
-                {{ getPressureMm(weatherInfo?.main.pressure) }}
-              </div>
-              <div class="info-main-text">
-                mm
-              </div>
+        <div class="card-centered">
+          <div class="info-main">
+            <div class="info-main-num">
+              {{ getPressureMm(weatherInfo?.main.pressure) }}
+            </div>
+            <div class="info-main-text">
+              mm
             </div>
           </div>
-        </template>
+        </div>
       </highlight>
 
       <highlight title="Sunrise and sunset" unit="%" card-title="Cloudiness" class-name="sun"
                  :small-card-data="cloudCardData" :card-value="weatherInfo?.clouds.all">
-        <template #default>
-          <div class="states">
-            <div class="state">
-              <div class="state-pic"></div>
-              <div class="state-title">
-                Sunrise
-              </div>
-              <div class="state-time">
-                {{ sunriseTime }}
-              </div>
+        <div class="states">
+          <div class="state">
+            <div class="state-pic"></div>
+            <div class="state-title">
+              Sunrise
             </div>
-            <div class="state">
-              <div class="state-pic state-pic--flipped"></div>
-              <div class="state-title">
-                Sunset
-              </div>
-              <div class="state-time">
-                {{ sunsetTime }}
-              </div>
+            <div class="state-time">
+              {{ sunriseTime }}
             </div>
           </div>
-        </template>
+          <div class="state">
+            <div class="state-pic state-pic--flipped"></div>
+            <div class="state-title">
+              Sunset
+            </div>
+            <div class="state-time">
+              {{ sunsetTime }}
+            </div>
+          </div>
+        </div>
       </highlight>
 
     </div>
