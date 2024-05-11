@@ -1,6 +1,7 @@
 <script setup>
 import HighlightSmallCard from "./HighlightSmallCard.vue"
-const props = defineProps({
+
+defineProps({
   className: {
     required: true,
     type: String,
@@ -17,10 +18,16 @@ const props = defineProps({
     required: true,
     type: String,
   },
+  smallUnit: {
+    type: String,
+  },
   smallCardData: {
     type: String,
   },
   cardValue: {
+    type: Number,
+  },
+  classNameCard: {
     type: String,
   },
 })
@@ -29,15 +36,20 @@ const props = defineProps({
 <template>
   <div class="highlight">
     <div class="card">
-      <div class="card-title">
+      <div class="title">
         {{title}}
       </div>
-      <div class="card-pic" :class="'card-pic--' + className"></div>
-      <div class="card-info">
-        <slot></slot>
+      <div class="pic" :class="'pic--' + className"/>
+      <div class="info">
+        <slot/>
       </div>
     </div>
-    <highlight-small-card :unit="unit" :class-name-card="className" :card-title="cardTitle" :card-data="smallCardData" :card-value="cardValue"/>
+    <highlight-small-card
+        :unit="smallUnit"
+        :class-name-card="classNameCard"
+        :card-title="cardTitle"
+        :card-data="smallCardData"
+        :card-value="cardValue"/>
   </div>
 </template>
 

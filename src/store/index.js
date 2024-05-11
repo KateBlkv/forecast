@@ -1,5 +1,6 @@
 import {createStore} from 'vuex';
 import {API_KEY, BASE_URL} from '../constants'
+import {capitalizeFirstLetter} from "@/utils/index.js";
 
 const store = createStore({
     state(){
@@ -17,32 +18,29 @@ const store = createStore({
         },
     },
     actions: {
-        getWeather(context, city){
-            fetch(`${BASE_URL}?q=${city}&units=metric&appid=${API_KEY}`)
-                .then((response)=>response.json())
-                .then((data)=> {
-                    if(Object.hasOwn(data, 'message')){
-                        context.commit('setError', data.message)
-                    }else{
-                        context.commit('setWeatherInfo', data)
-                        context.commit('setError', false)
-                    }
-                })
+        async getWeather(context, city) {
+            try {
+                const response = await fetch(`${BASE_URL}?q=${city}&units=metric&appid=${API_KEY}`)
+                const data = await response.json()
+                if (!response.ok) {
+                    context.commit('setError', capitalizeFirstLetter(data.message) || 'Something went wrong')
+                    return
+                }
+                context.commit('setWeatherInfo', data)
+                context.commit('setError', '')
+            } catch (e) {
+                console.log(e)
+                context.commit('setError', 'Something went wrong')
+            }
         },
     },
     getters: {
-        // getWeatherData(state){
-        //     return state.weatherInfo?.weather ? state.weatherInfo?.weather[0] : {}
-        // },
         getMainData(state){
             return state.weatherInfo?.main
         },
         getWeatherInfo(state){
             return state.weatherInfo
         },
-        // getSysData(state){
-        //     return state.weatherInfo?.sys
-        // },
         getCoord(state){
             return state.weatherInfo?.coord
         },

@@ -1,15 +1,10 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import store from "@/store/index.js";
+import { computed } from 'vue'
 import { capitalizeFirstLetter } from '../utils'
+import useWeather from "@/hooks/useWeather.js";
+import store from "@/store/index.js";
 
-const city = ref('Izmir')
-
-function getWeather(){
-  store.dispatch('getWeather', city.value)
-}
-
-onMounted(getWeather)
+const { city, getWeather } = useWeather()
 
 const today = new Date().toLocaleString('en-EN', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric'})
 
@@ -23,18 +18,19 @@ const props = defineProps({
 const weather = computed(() => props.data?.weather[0])
 const mainData = computed(() => props.data?.main)
 const sysData = computed(() => props.data?.sys)
+const error = computed(() => store.getters.getError)
 </script>
 
 <template>
   <div class="info">
     <div class="city-inner">
-      <input type="text" class="search" v-model="city" @keyup.enter="getWeather">
+      <input type="text" class="search" :class="{'has-error' : error }" v-model="city" @keyup.enter="getWeather">
+      <div v-if="error" class="error-msg">{{ error }}</div>
     </div>
-    <div v-if="weather" class="summary">
+    <div v-if="weather">
       <div
           :style="`background-image: url('/src/assets/img/weather-main/${weather.description}.png');`"
-          class="pic-main"
-      ></div>
+          class="pic-main"/>
       <div class="weather">
         <div class="temp">
           {{ Math.round(mainData?.temp) }} °C

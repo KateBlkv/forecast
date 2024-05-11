@@ -17,7 +17,9 @@ const props = defineProps({
   }
 })
 
-const timezone = computed(() => props.weatherInfo?.timezone )
+const timezone = computed(() => {
+  return props.weatherInfo?.timezone
+} )
 
 const sunriseTime = computed(() => {
   return getTime(props.weatherInfo?.sys?.sunrise + timezone.value)
@@ -33,10 +35,16 @@ const sunsetTime = computed(() => {
     <div class="title">
       Today's Highlights
     </div>
-    <div class="highlights-wrapper">
+    <div class="wrapper">
 
-      <highlight title="Wind" unit="m/s" card-title="Wind gusts" class-name="wind" :small-card-data="windCardData"
-                 :card-value="weatherInfo?.wind?.gust">
+      <highlight title="Wind"
+                 unit="m/s"
+                 card-title="Wind gusts"
+                 class-name="wind"
+                 :small-card-data="windCardData"
+                 :card-value="weatherInfo?.wind?.gust"
+                 small-unit="m/s"
+                 class-name-card="gusts">
         <template #default>
           <div class="card-justify">
             <div class="info-main">
@@ -59,8 +67,14 @@ const sunsetTime = computed(() => {
         </template>
       </highlight>
 
-      <highlight title="Pressure" unit="mm" card-title="Feels like" class-name="pressure" :small-card-data="tempCardData"
-                 :card-value="weatherInfo?.main.feels_like">
+      <highlight title="Pressure"
+                 unit="mm"
+                 card-title="Feels like"
+                 class-name="pressure"
+                 :small-card-data="tempCardData"
+                 :card-value="weatherInfo?.main.feels_like"
+                 small-unit="°C"
+                 class-name-card="pressure">
         <template #default>
           <div class="card-centered">
             <div class="info-main">
@@ -75,12 +89,18 @@ const sunsetTime = computed(() => {
         </template>
       </highlight>
 
-      <highlight title="Sunrise and sunset" unit="%" card-title="Cloudiness" class-name="sun"
-                 :small-card-data="cloudCardData" :card-value="weatherInfo?.clouds.all">
+      <highlight title="Sunrise and sunset"
+                 unit="%"
+                 card-title="Cloudiness"
+                 class-name="sun"
+                 :small-card-data="cloudCardData"
+                 :card-value="weatherInfo?.clouds.all"
+                 small-unit="%"
+                 class-name-card="sun">
         <template #default>
           <div class="states">
             <div class="state">
-              <div class="state-pic"></div>
+              <div class="state-pic"/>
               <div class="state-title">
                 Sunrise
               </div>
@@ -89,7 +109,7 @@ const sunsetTime = computed(() => {
               </div>
             </div>
             <div class="state">
-              <div class="state-pic state-pic--flipped"></div>
+              <div class="state-pic state-pic--flipped"/>
               <div class="state-title">
                 Sunset
               </div>

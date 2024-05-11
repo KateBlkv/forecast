@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   firstTitle: {
     required: true,
     type: String,
@@ -13,7 +13,6 @@ const props = defineProps({
   },
   firstValue: {
     required: true,
-    type: String,
   },
 })
 </script>
@@ -21,17 +20,17 @@ const props = defineProps({
 <template>
   <div class="block-bottom">
     <div class="block-bottom-inner">
-      <div class="block-bottom-pic" :class="'pic-' + imgClass"></div>
+      <div class="block-bottom-pic" :class="'pic-' + imgClass"/>
       <div class="block-bottom-texts">
-        <div class="block-bottom-text-block">
-          <div class="block-bottom-text-block-title">
+        <div class="text-block">
+          <div class="block-title">
             {{firstTitle}}: {{ firstValue }}
           </div>
-          <div class="block-bottom-text-block-desc">
-            <slot name="firstText"></slot>
+          <div class="text-block-desc">
+            <slot name="firstText"/>
           </div>
         </div>
-        <slot name="additional"></slot>
+        <slot name="additional"/>
       </div>
     </div>
   </div>

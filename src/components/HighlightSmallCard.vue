@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   cardTitle: {
     required: true,
     type: String,
@@ -16,18 +16,18 @@ const props = defineProps({
     type: String,
   },
   cardValue: {
-    type: String,
+    type: Number,
   },
 })
 </script>
 
 <template>
   <div class="card-small">
-    <div class="card-small-title">
+    <div class="small-title">
       {{cardTitle}}
     </div>
-    <div class="card-small-info">
-      <div v-if="cardValue" class="card-small-data">
+    <div class="small-info">
+      <div v-if="cardValue" class="small-data">
         <div class="info-main-num">
           {{ Math.round(cardValue) }}
         </div>
@@ -35,9 +35,9 @@ const props = defineProps({
           {{unit}}
         </div>
       </div>
-      <div class="card-small-hint">
-        <div class="card-small-pic" :class="'card-small-pic--' + classNameCard"></div>
-        <div class="card-small-text" v-html="cardData"/>
+      <div class="small-hint">
+        <div class="small-pic" :class="'small-pic--' + classNameCard"/>
+        <div class="small-text" v-html="cardData"/>
       </div>
     </div>
   </div>
